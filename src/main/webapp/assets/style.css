@@ -1,0 +1,81 @@
+* {
+    font-family: "Agency FB";
+}
+
+
+body {
+    background-color: #d8d8d8;
+    margin: 0;
+    padding: 0;
+}
+
+h3 {
+    &.title-section {
+        background-color: darkcyan;
+        color: white;
+        margin: 0;
+        padding: 10px 0;
+        text-align: center;
+    }
+}
+
+main {
+    width: max-content;
+    margin: 50px auto;
+    min-height: 500px;
+}
+
+section {
+    &.content-page {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+article {
+}
+
+
+
+div {
+    &#document {
+        width: 500px;
+        height: 100%;
+        padding: 50px 30px;
+        background-color: azure;
+        box-shadow: 0 0 0.2em rgba(0, 0, 0, 0.48);
+    }
+
+    &#chat {
+        width: 200px;
+        margin-left: 20px;
+        height: 100%;
+    }
+
+    &.content-chat {
+        background-color: white;
+        min-height: 100%;
+        width: 100%;
+    }
+}
+
+form {
+    &#sendMsg {
+        background-color: white;
+        top: 5px;
+        display: flex;
+        justify-content: center;
+    }
+}
+button {
+    background-color: #ffeb80;
+    text-align: center;
+    padding: 2px;
+}
+
+nav {
+    width: 100%;
+    height: 3rem;
+    background-color: darkcyan;
+    margin-bottom: 20px;
+}
