@@ -1,4 +1,4 @@
-package org.devweb.onlineeditor.document;
+package org.devweb.onlineeditor.models.document;
 
 import java.util.ArrayList;
 import java.util.Date;
