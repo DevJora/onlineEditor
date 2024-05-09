@@ -9,4 +9,20 @@
             <include-prelude>/taglibs.jsp</include-prelude>
         </jsp-property-group>
     </jsp-config>
+    <context-param>
+        <param-name>JDBC_DRIVER</param-name>
+        <param-value>com.mysql.cj.jdbc.Driver</param-value>
+    </context-param>
+    <context-param>
+        <param-name>JDBC_URL</param-name>
+        <param-value>jdbc:mysql://localhost:3306/editor</param-value>
+    </context-param>
+    <context-param>
+        <param-name>JDBC_LOGIN</param-name>
+        <param-value>root</param-value>
+    </context-param>
+    <context-param>
+        <param-name>JDBC_PASSWORD</param-name>
+        <param-value>Rachel.64</param-value>
+    </context-param>
 </web-app>

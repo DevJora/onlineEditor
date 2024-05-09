@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+div {
+    &.editor {
+        width: 60%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        background-color: white;
+        padding: 20px;
+        border-radius: 6px;
+        min-height: 500px;
+    }
+
+    &.outils {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    &.outils > button {
+        color: white;
+        background-color: rgba(0, 0, 0, 0.74);
+        width: 50px;
+        height: 35px;
+        border: 1px solid #222;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+    &.outils > button:hover {
+        background-color: black;
+    }
+
+    /* dimensions A4 2480 x 3508 pixels en 595*842 sur le web*/
+    &.document {
+        width: 100%;
+        /*max-width: 595px;
+        max-height: 842px;*/
+
+    }
+
+    &.texte {
+        width: 100%;
+        border: solid 1px rgb(31, 70, 128);
+        height: calc(100% - 50px);
+        border-radius: 6px;
+        padding: 20px;
+        word-wrap: break-word;
+    }
+
+    &.bloc {
+        width: 100%;
+    }
+
+    &#doc{
+        padding: 20px;
+    }
+    &#doc > h1{
+        margin-bottom: 30px;
+    }
+
+    &.bloc {
+        margin-top: 20px;
+    }
+
+    &.collab {
+        display: flex;
+        justify-content: center;
+    }
+
+
+}
+
+.delete-element {
+    background-color: rgba(220, 20, 60, 0.91);
+    color: white;
+
+    position: absolute;
+    border-radius: 25px;
+    left: 65%;
+    margin-top: 2;
+
+}
+
+.delete-element:hover {
+    background-color: crimson;
+}
+
+.pointer {
+    cursor: pointer;
+}
