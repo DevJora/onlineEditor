@@ -15,7 +15,7 @@
     </context-param>
     <context-param>
         <param-name>JDBC_URL</param-name>
-        <param-value>jdbc:mysql://localhost:3306/editor</param-value>
+        <param-value>jdbc:mysql://localhost:3300/editor</param-value>
     </context-param>
     <context-param>
         <param-name>JDBC_LOGIN</param-name>

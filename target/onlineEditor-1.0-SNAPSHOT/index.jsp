@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-<<<<<<< Updated upstream
 <head>
   <title>JSP - Hello World</title>
 </head>
@@ -8,7 +7,7 @@
 <h1><%= "Hello World!" %></h1>
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
-=======
+
 <jsp:include page="head.jsp" />
 
 <body onload="connexionChat();">
@@ -31,6 +30,6 @@
             signinSection.style.display = 'none';
     }
 </script>
->>>>>>> Stashed changes
+
 </body>
 </html>
