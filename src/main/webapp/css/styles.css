@@ -1,0 +1,23 @@
+/* Barre de navigation */
+nav {
+  background-color: black; /* Couleur de fond noire */
+  padding: 10px 0; /* Ajoute de l'espace autour des liens */
+}
+
+/* Style des liens dans la barre de navigation */
+nav a {
+  color: white; /* Couleur du texte blanc */
+  text-decoration: none; /* Supprime la soulignement par défaut */
+  padding: 10px 20px; /* Ajoute de l'espace autour des liens */
+  transition: background-color 0.3s; /* Transition fluide pour le changement de couleur de fond */
+}
+
+/* Style des liens au survol */
+nav a:hover {
+  background-color: rgb(128, 0, 0); /* Couleur de fond turquoise au survol */
+}
+
+/* Style des liens actifs */
+nav a.active {
+  background-color: aqua; /* Vous pouvez définir une couleur différente pour le lien actif si nécessaire */
+}
