@@ -2,7 +2,6 @@
   <title>Gdoc-connexion</title>
   <link href="css/styles.css" rel="stylesheet">
    <style>
-        /* Ajoutez des styles supplémentaires ici si nécessaire */
         body {
             margin: 0;
             padding: 0;
@@ -79,14 +78,58 @@
         }
 
         form input[type="submit"]:hover {
-            background: #03e9f4;
-            color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 5px #03e9f4,
-                        0 0 25px #03e9f4,
-                        0 0 50px #03e9f4,
-                        0 0 100px #03e9f4;
+            background: green;           
         }
+        
+	div a:link, a:visited {
+ 	 background-color: grey;
+ 	 color: white;
+  	 border: 2px solid blue;
+ 	 padding: 10px 20px;
+ 	 text-align: center;
+	text-decoration: none;
+ 	 display: inline-block;
+}
+
+div a:hover, a:active {
+  background-color: orange;
+  color: white;
+}
+
+.buttonco {
+  background-color: #fff;
+  border: 0 solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all .1s cubic-bezier(.4, 0, .2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-81:hover {
+  background-color: #1e293b;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .button-81 {
+    font-size: 1.125rem;
+    padding: 1rem 2rem;
+  }
+}
     </style>
 </head>
 <nav>
@@ -96,16 +139,16 @@
     <a href="connexion">Connexion</a>
     <a href="inscription">Inscription</a>
 </nav>
-<form class="container" method="post" action="connexion">
-    <h1 class="h3 mb-3 fw-normal">Connexion à l'espace utilisateur</h1>
+<form method="post" action="connexion">
+    <h2 class="h3 mb-3 fw-normal">Connexion à l'espace utilisateur</h2>
 
-    <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+    <div class="user-box">   
+        <input type="email" class="form-control" id="floatingInput" required>
         <label for="floatingInput">Adresse mail</label>
         <span class="erreur">${form.erreurs['email']}</span>
     </div>
-    <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+    <div class="user-box">   
+        <input type="password" class="form-control" id="floatingPassword" required>
         <label for="floatingPassword">Mot de passe</label>
         <span class="erreur">${form.erreurs['pwd']}</span>
     </div>
@@ -116,7 +159,8 @@
             Se souvenir de moi
         </label>
     </div>
-    <button class="btn btn-primary w-100 py-2" type="submit">Connexion</button>
-    <a href="/inscription"><button class="btn btn-warning w-100 py-2" type="button">Nouveau compte</button></a>
+    <button class="buttonco" type="submit">Connexion</button>
+    <div><a href="inscription" target="_blank">Nouveau compte</a></div>
+
     <p class="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
 </form>
