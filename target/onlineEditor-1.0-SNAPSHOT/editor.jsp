@@ -22,10 +22,10 @@
     <!-- Latest compiled and minified JavaScript -->
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
 </head>
-<body onload="connexionChat();">
-<main class="">
-    <article>
-        <div class="editor">
+<body onload="">
+<main>
+    <article >
+        <div class="editor" id="editor">
             <div class="outils">
                 <!--Liste des outils à utiliser-->
                 <!--texte en gras-->
@@ -102,7 +102,6 @@
                 </button>
             </div>
             <div class="document" id="doc" >
-
                 <h1 contenteditable = "true">Titre du document</h1>
             </div>
 
@@ -192,8 +191,9 @@
             </form>
         </div>-->
 </main>
-<script type="text/javascript" src="assets/model.js"></script>
-<script type="text/javascript" src="assets/chat.js"></script>
+
+<script src="assets/model.js"></script>
+<script src="assets/editor.js"></script>
 </body>
 
 </html>

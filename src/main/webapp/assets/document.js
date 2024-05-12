@@ -44,15 +44,16 @@ function ajouterBloc(){
     contentbloc.innerHTML = "exemple de contenu - bloc "+idBloc;
     bloc.appendChild(titre);
     bloc.appendChild(contentbloc);
-    bloc.addEventListener("input", function(e) {
+    /*bloc.addEventListener("input", function(e) {
         let blocChange = new Bloc(e.target.id, e.target.children[0].outerHTML, e.target.children[1].outerHTML)
         actualiserBloc(blocChange);
-    }, false);
+    }, false);*/
 
     let nouveauBloc = new Bloc(idBloc, titre.outerHTML, contentbloc.outerHTML);
     leDoc.blocs.push(nouveauBloc);
     document.getElementById('doc').appendChild(bloc);
 
+    console.log("document changé")
 }
 
 

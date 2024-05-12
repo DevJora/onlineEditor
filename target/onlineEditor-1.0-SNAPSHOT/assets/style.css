@@ -4,7 +4,7 @@
 
 
 body {
-    background-color: #d8d8d8;
+    background-color: #6e6868;
     margin: 0;
     padding: 0;
 }
@@ -19,14 +19,12 @@ h3 {
     }
 }
 
-<<<<<<< Updated upstream
-=======
 p {
     &.message {
         position: relative;
-    padding: 2px 10px;
-    border-radius: 25px;
-    width: max-content;
+        padding: 2px 10px;
+        border-radius: 25px;
+        width: max-content;
         margin-bottom: 5px;
         max-width: 100%;
         &.me {
@@ -48,10 +46,9 @@ p {
 }
 
 
->>>>>>> Stashed changes
 main {
-    width: max-content;
-    margin: 50px auto;
+    width: 100%;
+    display: flex;
     min-height: 500px;
 }
 
@@ -63,10 +60,7 @@ section {
 }
 
 article {
-<<<<<<< Updated upstream
-}
-
-=======
+    background-color: #6c6b6b;
     width: 80%;
     display: flex;
     justify-content: center;
@@ -86,22 +80,19 @@ button {
     align-items: center;
 
 }
->>>>>>> Stashed changes
 
 
 div {
-    &#document {
-        width: 500px;
-        height: 100%;
+    &#doc {
+        width: 640px;
+        min-height: 600px;
         padding: 50px 30px;
-        background-color: azure;
+        background-color: white;
         box-shadow: 0 0 0.2em rgba(0, 0, 0, 0.48);
     }
 
     &#chat {
-        width: 200px;
-        margin-left: 20px;
-        height: 100%;
+        height: 77vh;
     }
 
     &.content-chat {
@@ -130,6 +121,13 @@ nav {
     bottom: 0;
     width: 100%;
     height: 3rem;
+}
+
+button.delete-element{
+    background-color: rgb(188, 90, 90);
+    color: white;
+    position: absolute;
+    left: 200px;
 }
 
 

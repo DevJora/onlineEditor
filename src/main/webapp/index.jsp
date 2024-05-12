@@ -10,7 +10,7 @@
 
 <jsp:include page="head.jsp" />
 
-<body onload="connexionChat();">
+<body onload="connexionChat(); connexionChat();">
 <a href="hello-servlet">Hello Servlet</a>
 <a href="editor">Editor servlet </a>
 <a href="home">Home</a>
