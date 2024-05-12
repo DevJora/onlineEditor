@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Hello World</title>
-<link href="css/styles.css" rel="stylesheet">
+  <title>Gdoc</title>
+  <link href="css/menus.css" rel="stylesheet">
 </head>
 <body>
-<h1><%= "Hello World!" %></h1>
+<h1><%= "Document Online" %></h1>
 <br/>
 
-<nav>
-    <a href="hello-servlet">Hello Servlet</a>
+
+<nav class="cmenu">
+	<a href="index.jsp">Menu</a>
+    <a href="hello-servlet">Chat</a>
     <a href="editor">Editor servlet</a>
     <a href="home">Home</a>
     <a href="connexion">Connexion</a>
     <a href="inscription">Inscription</a>
 </nav>
-
 <body onload="connexionChat();">
+
 
 
 <script>
@@ -29,11 +31,10 @@
     }
 
     function swichToLogin(){
-        console.log("dÃ©ja membre")
+        console.log("déja membre")
         loginSection.style.display = 'block';
             signinSection.style.display = 'none';
     }
 </script>
-
 </body>
 </html>

@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             font-family: sans-serif;
-            background: linear-gradient(#141e30, #243b55);
+            background: #272727;;
         }
 
         form {
@@ -70,7 +70,7 @@
             position: relative;
             display: inline-block;
             padding: 10px 20px;
-            color: #03e9f4;
+            color: red;
             font-size: 16px;
             text-decoration: none;
             text-transform: uppercase;
@@ -78,22 +78,18 @@
             transition: .5s;
             margin-top: 40px;
             letter-spacing: 4px;
+             background: linear-gradient(#141e30, #243b55);
         }
 
         form input[type="submit"]:hover {
             background: #03e9f4;
-            color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 5px #03e9f4,
-                        0 0 25px #03e9f4,
-                        0 0 50px #03e9f4,
-                        0 0 100px #03e9f4;
         }
     </style>
 </head>
 <body>
 <nav>
-    <a href="hello-servlet">Hello Servlet</a>
+	<a href="index.jsp">Menu</a>
+    <a href="hello-servlet">Chat</a>
     <a href="editor">Editor servlet</a>
     <a href="home">Home</a>
     <a href="connexion">Connexion</a>

@@ -6,7 +6,7 @@
             margin: 0;
             padding: 0;
             font-family: sans-serif;
-            background: linear-gradient(#141e30, #243b55);
+            background: #272727;;
         }
 
         form {
@@ -81,14 +81,16 @@
             background: green;           
         }
         
-	div a:link, a:visited {
- 	 background-color: grey;
+div a:link, a:visited {
+ 	 background-color: #48bb44;
  	 color: white;
-  	 border: 2px solid blue;
+  	 border: 2px solid white;
  	 padding: 10px 20px;
  	 text-align: center;
-	text-decoration: none;
+	 text-decoration: none;
  	 display: inline-block;
+ 	 font-weight: bolder;
+ 	 
 }
 
 div a:hover, a:active {
@@ -98,13 +100,9 @@ div a:hover, a:active {
 
 .buttonco {
   background-color: #fff;
-  border: 0 solid #e2e8f0;
-  border-radius: 1.5rem;
-  box-sizing: border-box;
   color: #0d172a;
   cursor: pointer;
   display: inline-block;
-  font-family: "Basier circle",-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   font-size: 1.1rem;
   font-weight: 600;
   line-height: 1;
@@ -114,8 +112,6 @@ div a:hover, a:active {
   text-decoration-thickness: auto;
   transition: all .1s cubic-bezier(.4, 0, .2, 1);
   box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
-  user-select: none;
-  -webkit-user-select: none;
   touch-action: manipulation;
 }
 
@@ -124,7 +120,7 @@ div a:hover, a:active {
   color: #fff;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 300px) {
   .button-81 {
     font-size: 1.125rem;
     padding: 1rem 2rem;
@@ -133,7 +129,8 @@ div a:hover, a:active {
     </style>
 </head>
 <nav>
-    <a href="hello-servlet">Hello Servlet</a>
+	<a href="index.jsp">Menu</a>
+    <a href="hello-servlet">Chat</a>
     <a href="editor">Editor servlet</a>
     <a href="home">Home</a>
     <a href="connexion">Connexion</a>
@@ -159,8 +156,11 @@ div a:hover, a:active {
             Se souvenir de moi
         </label>
     </div>
+     <br>
     <button class="buttonco" type="submit">Connexion</button>
-    <div><a href="inscription" target="_blank">Nouveau compte</a></div>
-
+    <br>
+    <br>
+    <br>
+    <div><a href="inscription">Nouveau compte</a></div>
     <p class="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
 </form>
