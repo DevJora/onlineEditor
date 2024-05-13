@@ -1,4 +1,4 @@
-package org.devweb.onlineeditor.models.user;
+package org.devweb.onlineeditor.model;
 
 
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Utilisateur {
+public class utilisateur {
     private int id;
     @Getter
     private String nom;

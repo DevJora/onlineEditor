@@ -3,14 +3,14 @@ package org.devweb.onlineeditor.controllers;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import org.devweb.onlineeditor.forms.ConnexionForm;
-import org.devweb.onlineeditor.models.user.Utilisateur;
+import org.devweb.onlineeditor.model.utilisateur;
 
 import java.io.IOException;
 import java.sql.*;
 
 @WebServlet(name = "ConnexionServlet", value = "/connexion")
 public class ConnexionServlet extends HttpServlet {
+    org.devweb.onlineeditor.model.utilisateur utilisateur;
     Connection connexion = null;
     public static final String ATT_USER         = "utilisateur";
     public static final String ATT_FORM         = "form";
@@ -32,9 +32,9 @@ public class ConnexionServlet extends HttpServlet {
         if (isValid) {
             // Authentification réussie
             HttpSession session = request.getSession();
-            session.setAttribute("username", username);
+            session.setAttribute("utilisateur", utilisateur);
             System.out.println("utilisateur connecté");
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("home");
         } else {
             // Authentification échouée
             response.sendRedirect(VUE);
@@ -70,6 +70,10 @@ public class ConnexionServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+                utilisateur = new utilisateur();
+                utilisateur.setId(rs.getInt("id"));
+                utilisateur.setMail(rs.getString("mail"));
+                utilisateur.setPseudo(rs.getString("pseudo"));
                 return true;
             }
         } catch (SQLException e) {

@@ -51,7 +51,7 @@
 <body>
 <main>
     <div class="content-landing">
-        <h2>Bienvenu(e) <span>pseudo</span></h2>
+        <h2>Bonjour <span>${utilisateur.pseudo}</span></h2>
         <nav class="navbar navbar-expand-lg bg-body-tertiary w-100">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Navbar</a>
@@ -61,10 +61,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="deconnexion">Déconnexion</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link active" aria-current="page" href="editor">Nouveau document</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -93,7 +93,9 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="list-group" id="list-tab" role="tablist">
-                            <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Document 1</a>
+                            <c:forEach var="utilisateur" items="${documents}">
+                                <a class="list-group-item list-group-item-action" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Document po</a>
+                            </c:forEach>
                             <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">Document 2</a>
                             <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">Document 3</a>
                             <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">Document 4</a>

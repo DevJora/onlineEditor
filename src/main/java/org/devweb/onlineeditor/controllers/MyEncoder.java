@@ -1,6 +1,6 @@
 package org.devweb.onlineeditor.controllers;
 
-import org.devweb.onlineeditor.models.user.Utilisateur;
+import org.devweb.onlineeditor.model.utilisateur;
 
 import javax.json.Json;
 import javax.json.stream.JsonGenerator;
@@ -9,9 +9,9 @@ import javax.websocket.Encoder;
 import javax.websocket.EndpointConfig;
 import java.io.StringWriter;
 
-public class MyEncoder implements Encoder.Text<Utilisateur> {
+public class MyEncoder implements Encoder.Text<utilisateur> {
     @Override
-    public String encode(Utilisateur utilisateur) throws EncodeException {
+    public String encode(utilisateur utilisateur) throws EncodeException {
         StringWriter writer = new StringWriter();
         JsonGenerator generator = Json.createGenerator(writer);
         generator.writeStartObject()

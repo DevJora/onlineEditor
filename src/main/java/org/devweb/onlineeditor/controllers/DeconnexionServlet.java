@@ -8,13 +8,13 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet(name = "DeconnexionServlet", value = "/logout")
+@WebServlet(name = "DeconnexionServlet", value = "/deconnexion")
 public class DeconnexionServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws  IOException {
         HttpSession session = request.getSession();
         session.invalidate();
-        response.sendRedirect("connexion.jsp");
+        response.sendRedirect("index.jsp");
     }
 }

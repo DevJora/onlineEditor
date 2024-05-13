@@ -5,32 +5,38 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import org.devweb.onlineeditor.dao.DaoFactory;
+import org.devweb.onlineeditor.dao.DocumentDAO;
+import org.devweb.onlineeditor.model.document;
+import org.devweb.onlineeditor.model.utilisateur;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(name = "HomeServlet", value = "/home")
 public class HomeServlet extends HttpServlet {
 
+    List<document> docs = new ArrayList<>();
+    private DocumentDAO documentDAO;
+    private utilisateur user;
+
     @Override
-    public void init(){
-        try {
-            Class.forName(this.getServletContext().getInitParameter("JDBC_DRIVER"));
-            String bdURL = this.getServletContext().getInitParameter("JDBC_URL");
-            String bdLogin = this.getServletContext().getInitParameter("JDBC_LOGIN");
-            String bdPwd = this.getServletContext().getInitParameter("JDBC_PASSWORD");
-            Connection c = DriverManager.getConnection(bdURL, bdLogin, bdPwd);
-        }catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        System.out.println("connected to database.");
+    public void init() throws ServletException {
+        DaoFactory df = DaoFactory.getInstance();
+        documentDAO = df.getDocumentDAO();
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        user = (utilisateur) session.getAttribute("utilisateur");
+        request.setAttribute("documents", documentDAO.lister(user.getId()));
+        System.out.println(docs);
         this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
     }
 

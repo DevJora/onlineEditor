@@ -1,23 +1,30 @@
+import org.devweb.onlineeditor.model.document;
+
 import java.sql.*;
 
 public class DataBase {
     private static Connection connection;
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws SQLException {
 
         String url = "jdbc:mysql://localhost:3300/editor?serverTimezone=UTC";
         String username = "root";
         String pwd = "Rachel.64";
         try {
-            Connection connexion = DriverManager.getConnection(url, username, pwd);
-            Statement statement = connexion.createStatement();
-            //statement.executeUpdate("INSERT INTO utilisateur(nom, prenom, email, pwd) VALUES ('test', 'test', 'test@xyz', '1234')");
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM user");
+            connection = DriverManager.getConnection(url, username, pwd);
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from document where user_id = ?; ");
+            preparedStatement.setInt(1, 1);
+            ResultSet result = preparedStatement.executeQuery();
+            while (result.next()) {
+                int user_id = 1;
+                int id_doc = result.getInt("id");
+                String contenu = result.getString("content");
 
-            while(resultSet.next()){
-                System.out.println("id: "+ resultSet.getInt("id") );
-                System.out.println("pseudo: "+ resultSet.getString("pseudo") );
-                System.out.println("mail: "+ resultSet.getString("mail") );
+                document doc = new document();
+                doc.setId(id_doc);
+                doc.setUser_id(user_id);
+                doc.setContenu(contenu);
+                System.out.println(doc.getContenu());
             }
         } catch (SQLException e) {
             e.printStackTrace();

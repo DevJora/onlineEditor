@@ -1,4 +1,4 @@
-package org.devweb.onlineeditor.document;
+package org.devweb.onlineeditor.model;
 
 public class element {
     private int id;
