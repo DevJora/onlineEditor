@@ -1,5 +1,6 @@
 // tous les boutons
-console.log("script chat js chargé")
+console.log("script editor js chargé")
+
 const outils = document.querySelectorAll(".btn");
 var nbBlocs = 0;
 //event pour chaque btn
@@ -28,10 +29,24 @@ outils.forEach(element => {
 var ws;
 if("WebSocket" in window){
     //
-    ws = new WebSocket("ws://localhost:8080/onlineEditor_war_exploded/editor");
+    ws = new WebSocket(`ws://localhost:8080/onlineEditor_war_exploded/editor?id_document=${id_Document}&&id_user=${id_user}`);
 }
 
-
+function getCookie(name) {
+    var cookieValue = null;
+    if(document.cookie && document.cookie !== ''){
+        var cookies = document.cookie.split(';');
+        for(var i = 0; i < cookies.length; i++){
+            var cookie = cookie[i].trim();
+            if(cookie.substring(0, name.length+1)=== (name)+"="){
+                decodeURIComponent(cookie.substring(name.length + 1))
+                break;
+            }
+        }
+    }
+    console.log(cookieValue);
+    return cookieValue;
+}
 function connexionChat() {
     ws.onmessage = function (message) {
         var author = "Server";

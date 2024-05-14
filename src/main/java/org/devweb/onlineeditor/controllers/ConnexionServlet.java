@@ -10,7 +10,7 @@ import java.sql.*;
 
 @WebServlet(name = "ConnexionServlet", value = "/connexion")
 public class ConnexionServlet extends HttpServlet {
-    org.devweb.onlineeditor.model.utilisateur utilisateur;
+    utilisateur utilisateur;
     Connection connexion = null;
     public static final String ATT_USER         = "utilisateur";
     public static final String ATT_FORM         = "form";
@@ -36,8 +36,9 @@ public class ConnexionServlet extends HttpServlet {
             System.out.println("utilisateur connecté");
             response.sendRedirect("home");
         } else {
+           request.setAttribute("erreurLogin", "Login incorecte.");
             // Authentification échouée
-            response.sendRedirect(VUE);
+            response.sendRedirect("connexion");
         }
     }
     private void loadDatabase() {

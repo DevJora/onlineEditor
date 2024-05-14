@@ -12,35 +12,33 @@ import org.devweb.onlineeditor.model.document;
 import org.devweb.onlineeditor.model.utilisateur;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet(name = "HomeServlet", value = "/home")
-public class HomeServlet extends HttpServlet {
-
-    private DocumentDAO documentDAO;
-    private utilisateur user;
-
+@WebServlet(name = "SupDocumentServlet", value = "/supprimerdoc")
+public class SupprimerDocumentServlet extends HttpServlet {
+    DocumentDAO documentDAO;
+    utilisateur user;
     @Override
     public void init() throws ServletException {
         DaoFactory df = DaoFactory.getInstance();
         documentDAO = df.getDocumentDAO();
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if((user = (utilisateur) session.getAttribute("utilisateur")) != null){
-            request.setAttribute("documents", documentDAO.lister(user.getId()));
-            request.setAttribute("documentsCollab", documentDAO.listerCollab(user.getId()));
-            this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
-        }else {
-            String urlServlet = request.getContextPath() + "/";
+        int id = 0;
+        try{
+           id = Integer.parseInt(request.getParameter("id"));
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+        }
+        if(documentDAO.supprimer(id)){
+            /*String urlPageActuelle = request.getRequestURI();
+            //  sendRedirect pour recharger la page en redirigeant vers l'URL actuelle
+            response.sendRedirect(urlPageActuelle);*/
+            String urlServlet = request.getContextPath() + "/home";
             // sendRedirect pour rediriger vers l'URL de l'edition
             response.sendRedirect(urlServlet);
+        }else {
+            System.out.println("erreur de suppression du document.");
         }
     }
 

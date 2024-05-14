@@ -19,14 +19,54 @@ public class DataBase {
                 int user_id = 1;
                 int id_doc = result.getInt("id");
                 String contenu = result.getString("content");
+                String titre = result.getString("title");
 
                 document doc = new document();
                 doc.setId(id_doc);
                 doc.setUser_id(user_id);
                 doc.setContenu(contenu);
-                System.out.println(doc.getContenu());
+                doc.setTitre(titre);
+                System.out.println(doc.getTitre());
             }
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            connection = DriverManager.getConnection(url, username, pwd);
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into document(user_id, content, title) values (?, ?, ?); ");
+            preparedStatement.setInt(1, 1);
+            preparedStatement.setString(2, "test");
+            preparedStatement.setString(3, "test");
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("test réussi");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        try {
+            connection = DriverManager.getConnection(url, username, pwd);
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from document where id = ?; ");
+            preparedStatement.setInt(1, 6);
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("suppression réussi");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+        try {
+            connection = DriverManager.getConnection(url, username, pwd);
+            PreparedStatement preparedStatement = connection.prepareStatement("Update document SET content='^S?????' where id= 20;");
+            /*preparedStatement.setString(1, "Texte modifié");
+            preparedStatement.setInt(2, 23 );*/
+
+            System.out.println("Document modifié. ");
+        }catch (SQLException e){
             e.printStackTrace();
         }
     }

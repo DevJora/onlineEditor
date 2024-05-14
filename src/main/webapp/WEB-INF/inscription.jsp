@@ -12,9 +12,9 @@
 </head>
 <body>
 <form action="inscription" method="post">
-    Pseudo: <input type="text" name="pseudo"><br>
-    Mail: <input type="text" name="mail"><br>
-    Password: <input type="password" name="pwd"><br>
+    Pseudo: <input type="text" name="pseudo" required><br>
+    Mail: <input type="text" name="mail" required><br>
+    Password: <input type="password" name="pwd" required><br>
     <input type="submit" value="S'inscription">
 </form>
 </body>

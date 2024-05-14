@@ -14,10 +14,12 @@
 <style>
 
     main {
+
         background-color: lightgrey;
         justify-content: center;
         align-content: center;
         height: 100vh;
+
     }
 
     header {
@@ -33,7 +35,7 @@
         }
         &.landing {
             background-color: white;
-            height: 300px;
+            min-height: 500px;
             justify-content: center;
             align-content: center;
         }
@@ -54,7 +56,7 @@
         <h2>Bonjour <span>${utilisateur.pseudo}</span></h2>
         <nav class="navbar navbar-expand-lg bg-body-tertiary w-100">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <a class="navbar-brand" href="#">OnlineEditor</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -62,9 +64,6 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="deconnexion">Déconnexion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="editor">Nouveau document</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -88,26 +87,65 @@
                 </div>
             </div>
         </nav>
-        <div class="landing">
+        <div class="landing =">
+            <div class="d-flex">
+                <div class="w-50 m-1 card p-1">
+                    <h4 class="text-center">Créer un nouveau document</h4>
+                    <form class="d-flex w-75 m-auto" style="height: 30px;" action="ajoutdoc" method="post">
+                        <input class="form-control me-2" type="text" name="titreDocument" placeholder="ajouter le titre" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Nouveau</button>
+                    </form>
+                </div>
+                <div class="w-50 m-1 card p-1">
+                    <div>
+                        <h4 class="text-center">Ajouter une collaboration</h4>
+                        <form class="d-flex w-75 m-auto" style="height: 30px;" action="ajoutcollab" method="post">
+                            <input class="form-control me-2" type="text" name="code" placeholder="code du document" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Ajouter</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <hr>
+            <br>
             <div class="content-list-doc container">
-                <div class="row">
-                    <div class="col-4">
-                        <div class="list-group" id="list-tab" role="tablist">
-                            <c:forEach var="utilisateur" items="${documents}">
-                                <a class="list-group-item list-group-item-action" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">Document po</a>
+                <div class="d-flex justify-content-space-arround">
+                    <div class="card m-1 p-1" style="width: 65%;">
+                        <div class="list-group " id="list-tab" role="tablist">
+                            <h4 class="text-center">Mes documents</h4>
+                            <c:if test="documents.size() == 0">
+                                <p class="font-weight-bold">Vous n'avez aucun document.</p>
+                            </c:if>
+                            <c:forEach var="document" items="${documents}">
+                                <div class="d-flex" >
+                                    <a class="list-group-item list-group-item-action" id="list-home-list" data-bs-toggle="list" href="editor?id=${document.id}" role="tab" aria-controls="list-home">${document.titre}</a>
+                                    <a class="list-group-item list-group-item-action bg-danger" style="width: 30%; height: 40px;"  href="supprimerdoc?id=${document.id}" role="tab">Supprimer</a>
+                                    <span class="list-group-item list-group-item-action bg-warning" style="width: 30%; height: 40px;"   role="tab">${document.code_collab}</span>
+                                </div>
                             </c:forEach>
-                            <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">Document 2</a>
-                            <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">Document 3</a>
-                            <a class="list-group-item list-group-item-action" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">Document 4</a>
                         </div>
                     </div>
-                    <div class="col-8">
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">...</div>
-                            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
-                            <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
-                            <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+                    <div class="card m-1 p-1" style="width: 35%;">
+                        <div class="list-group " id="list-tab2" role="tablist">
+                            <h4 class="text-center">Mes Collaboration</h4>
+                            <c:if test="documents.size() == 0">
+                                <p class="font-weight-bold">Vous n'avez aucun document en collab.</p>
+                            </c:if>
+                            <c:forEach var="docCollab" items="${documentsCollab}">
+                                <div class="d-flex" >
+                                    <a class="list-group-item list-group-item-action" id="list-home-list2" data-bs-toggle="list" href="editor?id=${docCollab.id}" role="tab" aria-controls="list-home">${docCollab.titre}</a>
+                                </div>
+                            </c:forEach>
                         </div>
+                    </div>
+                    <!--<div class="col-8">
+                        <div class="tab-content" id="nav-tabContent">
+
+                            <c:forEach var="document" items="${documents}">
+                                <div class="tab-pane fade show active" id="contenu-${document.id}" role="tabpanel" aria-labelledby="list-home-list">${document.contenu}</div>
+                            </c:forEach>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -129,5 +167,6 @@
      </ul>
  </nav>-->
 </main>
+
 </body>
 </html>

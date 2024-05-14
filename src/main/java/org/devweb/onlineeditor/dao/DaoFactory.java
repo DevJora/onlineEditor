@@ -33,6 +33,10 @@ public class DaoFactory {
         return  new UtilisateurDao(this);
     }
 
+    public  CollaborationDAO getCollabDAO(){
+        return  new CollaborationDAO(this);
+    }
+
     public DocumentDAO getDocumentDAO(){
         return  new DocumentDAO(this);
     }

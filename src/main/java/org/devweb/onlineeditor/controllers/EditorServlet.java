@@ -1,35 +1,79 @@
 package org.devweb.onlineeditor.controllers;
 
 
+import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 import org.devweb.onlineeditor.dao.DaoFactory;
 import org.devweb.onlineeditor.dao.DocumentDAO;
 import org.devweb.onlineeditor.model.*;
+
+import javax.json.JsonObject;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "EditorServlet", value = "/editor")
 public class EditorServlet extends HttpServlet {
-    List<document> docs = new ArrayList<>();
+    document doc;
     private DocumentDAO documentDAO;
     private utilisateur user;
 
     @Override
     public void init() throws ServletException {
         DaoFactory df = DaoFactory.getInstance();
+        documentDAO = df.getDocumentDAO();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        user = (utilisateur) request.getAttribute("utilisateur");
-        request.setAttribute("documents", documentDAO.lister(user.getId()));
-        System.out.println(docs);
-        this.getServletContext().getRequestDispatcher("/editor.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        int id = 0;
+        try{
+            id = Integer.parseInt(request.getParameter("id"));
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+        }
+        user = (utilisateur) session.getAttribute("utilisateur");
+        doc = documentDAO.getDocument(id);
+        session.setAttribute("document", doc);
+
+        /*Gson gson = new Gson();
+        String jsonDocument = gson.toJson(doc);
+        String jsonUser = gson.toJson(user);
+
+        Cookie userCookie = new Cookie("userCookie", jsonUser);
+        Cookie documentCookie = new Cookie("documentCookie", jsonDocument);
+
+        response.addCookie(userCookie);
+        response.addCookie(documentCookie);
+
+        System.out.println(userCookie +" stocké dans le navigateur");
+        System.out.println(documentCookie +" stocké dans le navigateur");*/
+
+        Cookie pseudoCookie = new Cookie("pseudo", user.getPseudo());
+        Cookie mailCookie = new Cookie("mail", user.getMail());
+        Cookie iduserCookie = new Cookie("id", String.valueOf(user.getId()));
+
+        Cookie iddocumentCookie = new Cookie("id_document", String.valueOf(doc.getId()));
+        Cookie contenudocumentCookie = new Cookie("contenu_document", URLEncoder.encode(doc.getContenu(), "UTF-8"));
+        Cookie titredocumentCookie = new Cookie("titre_document", URLEncoder.encode(doc.getTitre(), "UTF-8"));
+
+        //D:-<h1 contenteditable="true">Sans titre</h1>
+
+        response.addCookie(pseudoCookie);
+
+        response.addCookie(mailCookie);
+        response.addCookie(iduserCookie);
+
+
+        response.addCookie(iddocumentCookie);
+        response.addCookie(contenudocumentCookie);
+        response.addCookie(titredocumentCookie);
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/editor.jsp").forward(request, response);
     }
 
     @Override
