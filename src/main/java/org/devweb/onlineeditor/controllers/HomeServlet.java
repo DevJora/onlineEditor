@@ -38,7 +38,7 @@ public class HomeServlet extends HttpServlet {
             request.setAttribute("documentsCollab", documentDAO.listerCollab(user.getId()));
             this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
         }else {
-            String urlServlet = request.getContextPath() + "/";
+            String urlServlet = request.getContextPath() + "/authentification";
             // sendRedirect pour rediriger vers l'URL de l'edition
             response.sendRedirect(urlServlet);
         }

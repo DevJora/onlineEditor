@@ -14,8 +14,7 @@
 <style>
 
     main {
-
-        background-color: lightgrey;
+        display: flex;
         justify-content: center;
         align-content: center;
         height: 100vh;
@@ -32,9 +31,12 @@
     div {
         &.content-landing {
             height: max-content;
+            width: 60%;
+
         }
         &.landing {
-            background-color: white;
+            padding-bottom: 20px;
+            /*border: solid 1px white;*/
             min-height: 500px;
             justify-content: center;
             align-content: center;
@@ -49,54 +51,45 @@
         height: max-content;
         margin: auto;
     }
+
+    .card-form {
+        width: 40%;
+        height: 200px;
+    }
+
+    .card-doc {
+        min-height: 200px;
+    }
 </style>
-<body>
+<body class="bg-dark text-light">
 <main>
-    <div class="content-landing">
-        <h2>Bonjour <span>${utilisateur.pseudo}</span></h2>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary w-100">
+    <div class="content-landing mt-5">
+        <h2 class="text-warning">Bonjour <span>${utilisateur.pseudo}</span><img src="./assets/img/icone.png" height="20" width="20"></h2>
+        <nav class="navbar navbar-expand-lg bg-warning w-100">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">OnlineEditor</a>
+                <a class="navbar-brand" href="/home">OnlineEditor</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="deconnexion">Déconnexion</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
+                <ul class="navbar-nav">
+                    <li class="">
+                        <a class="nav-link active" aria-current="page" href="deconnexion">Déconnexion</a>
+                    </li>
+                </ul>
             </div>
         </nav>
-        <div class="landing =">
-            <div class="d-flex">
-                <div class="w-50 m-1 card p-1">
-                    <h4 class="text-center">Créer un nouveau document</h4>
-                    <form class="d-flex w-75 m-auto" style="height: 30px;" action="ajoutdoc" method="post">
-                        <input class="form-control me-2" type="text" name="titreDocument" placeholder="ajouter le titre" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Nouveau</button>
-                    </form>
+        <div class="landing bg-secondary">
+            <div class="d-flex justify-content-center mt-2">
+                <div class=" m-1 card p-1 d-flex justify-content-center align-item-center card-form">
+                    <div>
+                        <h4 class="text-center">Créer un nouveau document</h4>
+                        <form class="d-flex w-75 m-auto" style="height: 30px;" action="ajoutdoc" method="post">
+                            <input class="form-control me-2" type="text" name="titreDocument" placeholder="ajouter le titre" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Nouveau</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="w-50 m-1 card p-1">
+                <div class=" m-1 card p-1 m-1 card p-1 d-flex justify-content-center align-item-center card-form">
                     <div>
                         <h4 class="text-center">Ajouter une collaboration</h4>
                         <form class="d-flex w-75 m-auto" style="height: 30px;" action="ajoutcollab" method="post">
@@ -111,7 +104,7 @@
             <br>
             <div class="content-list-doc container">
                 <div class="d-flex justify-content-space-arround">
-                    <div class="card m-1 p-1" style="width: 65%;">
+                    <div class="card m-1 p-1 "  style="width: 65%;">
                         <div class="list-group " id="list-tab" role="tablist">
                             <h4 class="text-center">Mes documents</h4>
                             <c:if test="documents.size() == 0">
@@ -126,9 +119,9 @@
                             </c:forEach>
                         </div>
                     </div>
-                    <div class="card m-1 p-1" style="width: 35%;">
+                    <div class="card m-1 p-1" style="width: 35%; min-height: 200px">
                         <div class="list-group " id="list-tab2" role="tablist">
-                            <h4 class="text-center">Mes Collaboration</h4>
+                            <h4 class="text-center">Mes Collaborations</h4>
                             <c:if test="documents.size() == 0">
                                 <p class="font-weight-bold">Vous n'avez aucun document en collab.</p>
                             </c:if>

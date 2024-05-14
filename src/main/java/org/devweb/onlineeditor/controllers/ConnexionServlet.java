@@ -15,10 +15,14 @@ public class ConnexionServlet extends HttpServlet {
     public static final String ATT_USER         = "utilisateur";
     public static final String ATT_FORM         = "form";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
-    public static final String VUE              = "/WEB-INF/connexion.jsp";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+        HttpSession session = request.getSession();
+        if(( session.getAttribute("utilisateur")) != null)
+            response.sendRedirect(request.getContextPath() + "/home");
+        else
+            this.getServletContext().getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

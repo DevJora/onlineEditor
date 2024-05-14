@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 import java.io.IOException;
@@ -18,7 +19,11 @@ public class InscriptionServlet extends HttpServlet {
     Connection connexion;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        if(( session.getAttribute("utilisateur")) != null)
+            response.sendRedirect(request.getContextPath() + "/home");
+        else
+            this.getServletContext().getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -7,10 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<html>
+<jsp:include page="../head.jsp" />
+<body class="bg-dark text-light d-flex align-item-center justify-content-center">
 <form action="inscription" method="post">
     Pseudo: <input type="text" name="pseudo" required><br>
     Mail: <input type="text" name="mail" required><br>

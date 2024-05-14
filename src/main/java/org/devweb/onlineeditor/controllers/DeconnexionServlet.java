@@ -15,6 +15,6 @@ public class DeconnexionServlet extends HttpServlet {
             throws  IOException {
         HttpSession session = request.getSession();
         session.invalidate();
-        response.sendRedirect("index.jsp");
+        response.sendRedirect(request.getContextPath() + "/authentification");
     }
 }
