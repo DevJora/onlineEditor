@@ -1,0 +1,135 @@
+* {
+    font-family: "Agency FB";
+}
+
+
+body {
+    background-color: #d8d8d8;
+    margin: 0;
+    padding: 0;
+}
+
+h3 {
+    &.title-section {
+        background-color: darkcyan;
+        color: white;
+        margin: 0;
+        padding: 10px 0;
+        text-align: center;
+    }
+}
+
+<<<<<<< Updated upstream
+=======
+p {
+    &.message {
+        position: relative;
+    padding: 2px 10px;
+    border-radius: 25px;
+    width: max-content;
+        margin-bottom: 5px;
+        max-width: 100%;
+        &.me {
+            margin-right: 0;
+            background-color: cornflowerblue;
+            color: white;
+        }
+
+        &.other {
+            background-color: azure;
+            color: black;
+        }
+
+        &.server {
+            background-color: azure;
+            color: white;
+        }
+    }
+}
+
+
+>>>>>>> Stashed changes
+main {
+    width: max-content;
+    margin: 50px auto;
+    min-height: 500px;
+}
+
+section {
+    &.content-page {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+article {
+<<<<<<< Updated upstream
+}
+
+=======
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+aside {
+    width: 20%;
+    height: 100vh;
+}
+
+button {
+    border: none;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+>>>>>>> Stashed changes
+
+
+div {
+    &#document {
+        width: 500px;
+        height: 100%;
+        padding: 50px 30px;
+        background-color: azure;
+        box-shadow: 0 0 0.2em rgba(0, 0, 0, 0.48);
+    }
+
+    &#chat {
+        width: 200px;
+        margin-left: 20px;
+        height: 100%;
+    }
+
+    &.content-chat {
+        background-color: white;
+        min-height: 100%;
+        width: 100%;
+    }
+}
+
+form {
+    &#sendMsg {
+        background-color: white;
+        top: 5px;
+        display: flex;
+        justify-content: center;
+    }
+}
+button {
+    background-color: #ffeb80;
+    text-align: center;
+    padding: 2px;
+}
+
+nav {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    height: 3rem;
+}
+
+

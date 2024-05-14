@@ -9,7 +9,7 @@
 <br/>
 
 
-<nav class="cmenu">ZZ
+<nav class="cmenu">
 	<a href="index.jsp">Menu</a>
     <a href="hello-servlet">Chat</a>
     <a href="editor">Editor servlet</a>
