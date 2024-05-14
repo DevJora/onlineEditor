@@ -1,0 +1,29 @@
+nav {
+  background-color: black; 
+  padding: 10px 0; 
+}
+
+
+nav a {
+  color: white; 
+  text-decoration: none; 
+  padding: 10px 20px;
+  transition: background-color 0.3s; /
+}
+
+
+nav a:hover {
+  background-color: rgb(128, 0, 0); 
+}
+
+
+nav a.active {
+  background-color: aqua; 
+}
+
+body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: #272727;
+        }

@@ -40,6 +40,7 @@ public class InscriptionServlet extends HttpServlet {
             response.sendRedirect("index.jsp");
         } else {
             // Gestion des erreurs d'inscription
+	    request.setAttribute("error", "L'e-mail fourni est déjà utilisé. Veuillez en choisir un autre.");          
             response.sendRedirect("WEB-INF/inscription.jsp");
         }
     }
@@ -61,25 +62,59 @@ public class InscriptionServlet extends HttpServlet {
     }
 
     private boolean registerUser(String mail, String pseudo, String password) {
-        String url = "jdbc:mysql://localhost:3306/your_database";
-        String dbUsername = "your_username";
-        String dbPassword = "your_password";
+        loadDatabase();
 
-       loadDatabase();
-
-        PreparedStatement ps = null;
+        // Vérifier si l'e-mail existe déjà
+        PreparedStatement checkStmt = null;
+        ResultSet resultSet = null;
         try {
-            ps = connexion.prepareStatement("INSERT INTO user (pseudo, mail, mdp) VALUES (?, ?, ?)");
-            ps.setString(1, pseudo);
-            ps.setString(2, mail);
-            ps.setString(3, password);
-            int rowsAffected = ps.executeUpdate();
+            checkStmt = connexion.prepareStatement("SELECT COUNT(*) FROM user WHERE mail = ?");
+            checkStmt.setString(1, mail);
+            resultSet = checkStmt.executeQuery();
+            resultSet.next();
+            int count = resultSet.getInt(1);
+            if (count > 0) {
+                // L'e-mail existe déjà, retourner false
+                return false;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (checkStmt != null) {
+                    checkStmt.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Insertion de l'utilisateur dans la base de données
+        PreparedStatement insertStmt = null;
+        try {
+            insertStmt = connexion.prepareStatement("INSERT INTO user (pseudo, mail, mdp) VALUES (?, ?, ?)");
+            insertStmt.setString(1, pseudo);
+            insertStmt.setString(2, mail);
+            insertStmt.setString(3, password);
+            int rowsAffected = insertStmt.executeUpdate();
             if (rowsAffected > 0) {
                 return true;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                if (insertStmt != null) {
+                    insertStmt.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
         return false;
     }
 }
