@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>GdocsInscription</title>
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="./assets/css/styles.css" rel="stylesheet">
 </head>
 <body>
 <nav>

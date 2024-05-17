@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import org.devweb.onlineeditor.dao.DaoFactory;
 import org.devweb.onlineeditor.dao.DocumentDAO;
+import org.devweb.onlineeditor.dao.HistoriqueDAO;
 import org.devweb.onlineeditor.model.*;
 
 import javax.json.JsonObject;
@@ -20,11 +21,15 @@ public class EditorServlet extends HttpServlet {
     document doc;
     private DocumentDAO documentDAO;
     private utilisateur user;
+    private HistoriqueDAO historiqueDAO;
+
+    private List<historique> historiques;
 
     @Override
     public void init() throws ServletException {
         DaoFactory df = DaoFactory.getInstance();
         documentDAO = df.getDocumentDAO();
+        historiqueDAO = df.getHistoriqueDAO();
     }
 
     @Override
@@ -37,43 +42,36 @@ public class EditorServlet extends HttpServlet {
             e.printStackTrace();
         }
         user = (utilisateur) session.getAttribute("utilisateur");
-        doc = documentDAO.getDocument(id);
-        session.setAttribute("document", doc);
+        if (user == null) {
+            response.sendRedirect(request.getContextPath()+"/authentification");
+        }else {
+            doc = documentDAO.getDocument(id);
+            session.setAttribute("document", doc);
+            request.setAttribute("historiques", historiqueDAO.afficherHistorique(doc, user));
 
-        /*Gson gson = new Gson();
-        String jsonDocument = gson.toJson(doc);
-        String jsonUser = gson.toJson(user);
+            Cookie pseudoCookie = new Cookie("pseudo", user.getPseudo());
+            Cookie mailCookie = new Cookie("mail", user.getMail());
+            Cookie iduserCookie = new Cookie("id", String.valueOf(user.getId()));
 
-        Cookie userCookie = new Cookie("userCookie", jsonUser);
-        Cookie documentCookie = new Cookie("documentCookie", jsonDocument);
+            Cookie iddocumentCookie = new Cookie("id_document", String.valueOf(doc.getId()));
+            Cookie contenudocumentCookie = new Cookie("contenu_document", URLEncoder.encode(doc.getContenu(), "UTF-8"));
+            Cookie titredocumentCookie = new Cookie("titre_document", URLEncoder.encode(doc.getTitre(), "UTF-8"));
 
-        response.addCookie(userCookie);
-        response.addCookie(documentCookie);
+            response.addCookie(pseudoCookie);
 
-        System.out.println(userCookie +" stocké dans le navigateur");
-        System.out.println(documentCookie +" stocké dans le navigateur");*/
-
-        Cookie pseudoCookie = new Cookie("pseudo", user.getPseudo());
-        Cookie mailCookie = new Cookie("mail", user.getMail());
-        Cookie iduserCookie = new Cookie("id", String.valueOf(user.getId()));
-
-        Cookie iddocumentCookie = new Cookie("id_document", String.valueOf(doc.getId()));
-        Cookie contenudocumentCookie = new Cookie("contenu_document", URLEncoder.encode(doc.getContenu(), "UTF-8"));
-        Cookie titredocumentCookie = new Cookie("titre_document", URLEncoder.encode(doc.getTitre(), "UTF-8"));
-
-        //D:-<h1 contenteditable="true">Sans titre</h1>
-
-        response.addCookie(pseudoCookie);
-
-        response.addCookie(mailCookie);
-        response.addCookie(iduserCookie);
+            response.addCookie(mailCookie);
+            response.addCookie(iduserCookie);
 
 
-        response.addCookie(iddocumentCookie);
-        response.addCookie(contenudocumentCookie);
-        response.addCookie(titredocumentCookie);
+            response.addCookie(iddocumentCookie);
+            response.addCookie(contenudocumentCookie);
+            response.addCookie(titredocumentCookie);
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/editor.jsp").forward(request, response);
+
+
+            this.getServletContext().getRequestDispatcher("/WEB-INF/editor.jsp").forward(request, response);
+        }
+
     }
 
     @Override

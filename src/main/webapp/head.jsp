@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JoraOMVA
-  Date: 15/04/2024
-  Time: 12:08
-  To change this template use File | Settings | File Templates.
---%>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Test head</title>

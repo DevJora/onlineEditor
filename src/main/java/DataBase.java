@@ -69,6 +69,21 @@ public class DataBase {
         }catch (SQLException e){
             e.printStackTrace();
         }
+
+        try {
+
+            connection = DriverManager.getConnection(url, username, pwd);
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from historic where date = '2024-05-17T08:32:07';");
+            ResultSet result = preparedStatement.executeQuery();
+            while (result.next()) {
+                System.out.println(result.getInt("id_doc"));
+                System.out.println(result.getString("content_doc"));
+                System.out.println(result.getString("date"));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
     DataBase(){
 

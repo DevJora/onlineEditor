@@ -1,6 +1,7 @@
 // tous les boutons
 console.log("script editor js chargé")
 
+
 const outils = document.querySelectorAll(".btn");
 var nbBlocs = 0;
 //event pour chaque btn
@@ -9,12 +10,10 @@ let doc = document.querySelector('#doc');
 outils.forEach(element => {
     // event click sur chaque bouton
     element.addEventListener("click",()=>{
-        console.log("click d'un btn outils")
         // recup des éléments mis dans le data-element
         var commande = element.dataset['element'];
         //inserer lien ou img
         if(commande == 'createLink' || commande == 'insertImage'){
-            console.log("commande " + commande);
             var url = prompt('Entrez le lien', 'http://');
             document.execCommand(commande, false, url);
         }else if(commande == 'addBloc'){
@@ -44,7 +43,7 @@ function getCookie(name) {
             }
         }
     }
-    console.log(cookieValue);
+
     return cookieValue;
 }
 function connexionChat() {
@@ -58,7 +57,6 @@ ws.onmessage = function (event) {
         let contenu = event.data.substr(3);
         writeMsg("Other", contenu);
     }else if(event.data.includes("D:-")){
-        console.log(event.data);
         let contenu = event.data.substr(3);
         doc.innerHTML = contenu;
     }
@@ -154,7 +152,6 @@ function ajouterBloc(){
     </button>
     * */
 
-    console.log("document changé");
 }
 
 /**
@@ -172,8 +169,11 @@ function  suppBloc(bloc){
 }
 
 
+
 document.querySelector("#doc").addEventListener("input", function(e) {
-    console.log("doc changé");
+    ws.send("D:-"+doc.innerHTML);
+})
+document.querySelector("#doc").addEventListener("change", function(e) {
     ws.send("D:-"+doc.innerHTML);
 })
 

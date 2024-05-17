@@ -1,16 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JoraOMVA
-  Date: 22/04/2024
-  Time: 19:14
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <jsp:include page="../head.jsp" />
-<script type="text/javascript" src="../assets/chat.js">
-</script>
 <style>
 
     main {
@@ -107,12 +99,12 @@
                     <div class="card m-1 p-1 "  style="width: 65%;">
                         <div class="list-group " id="list-tab" role="tablist">
                             <h4 class="text-center">Mes documents</h4>
-                            <c:if test="documents.size() == 0">
-                                <p class="font-weight-bold">Vous n'avez aucun document.</p>
+                            <c:if test="${documents.size() < 1}">
+                                <p class="font-weight-bold text-center">Vous n'avez aucun document.</p>
                             </c:if>
                             <c:forEach var="document" items="${documents}">
                                 <div class="d-flex" >
-                                    <a class="list-group-item list-group-item-action" id="list-home-list" data-bs-toggle="list" href="editor?id=${document.id}" role="tab" aria-controls="list-home">${document.titre}</a>
+                                    <a class="list-group-item list-group-item-action w-50" id="list-home-list" data-bs-toggle="list" href="editor?id=${document.id}" role="tab" aria-controls="list-home">${document.titre}</a>
                                     <a class="list-group-item list-group-item-action bg-danger" style="width: 30%; height: 40px;"  href="supprimerdoc?id=${document.id}" role="tab">Supprimer</a>
                                     <span class="list-group-item list-group-item-action bg-warning" style="width: 30%; height: 40px;"   role="tab">${document.code_collab}</span>
                                 </div>
@@ -122,8 +114,8 @@
                     <div class="card m-1 p-1" style="width: 35%; min-height: 200px">
                         <div class="list-group " id="list-tab2" role="tablist">
                             <h4 class="text-center">Mes Collaborations</h4>
-                            <c:if test="documents.size() == 0">
-                                <p class="font-weight-bold">Vous n'avez aucun document en collab.</p>
+                            <c:if test="${documentsCollab.size() < 1}">
+                                <p class="font-weight-bold text-center">Vous n'avez aucun document en collaboration.</p>
                             </c:if>
                             <c:forEach var="docCollab" items="${documentsCollab}">
                                 <div class="d-flex" >
@@ -132,33 +124,11 @@
                             </c:forEach>
                         </div>
                     </div>
-                    <!--<div class="col-8">
-                        <div class="tab-content" id="nav-tabContent">
-
-                            <c:forEach var="document" items="${documents}">
-                                <div class="tab-pane fade show active" id="contenu-${document.id}" role="tabpanel" aria-labelledby="list-home-list">${document.contenu}</div>
-                            </c:forEach>
-                        </div>-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-     <!--<nav aria-label="...">
-     <ul class="pagination">
-         <li class="page-item disabled">
-             <a class="page-link">Previous</a>
-         </li>
-         <li class="page-item"><a class="page-link" href="#">1</a></li>
-         <li class="page-item active" aria-current="page">
-             <a class="page-link" href="#">2</a>
-         </li>
-         <li class="page-item"><a class="page-link" href="#">3</a></li>
-         <li class="page-item">
-             <a class="page-link" href="#">Next</a>
-         </li>
-     </ul>
- </nav>-->
 </main>
 
 </body>

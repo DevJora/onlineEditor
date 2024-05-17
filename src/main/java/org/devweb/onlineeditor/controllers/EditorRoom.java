@@ -2,6 +2,7 @@ package org.devweb.onlineeditor.controllers;
 import jakarta.servlet.http.HttpSession;
 import org.devweb.onlineeditor.dao.DaoFactory;
 import org.devweb.onlineeditor.dao.DocumentDAO;
+import org.devweb.onlineeditor.dao.HistoriqueDAO;
 import org.devweb.onlineeditor.model.*;
 
 import jakarta.websocket.*;
@@ -20,6 +21,8 @@ public class EditorRoom {
     DaoFactory df = DaoFactory.getInstance();
     DocumentDAO documentDAO = df.getDocumentDAO();
 
+    HistoriqueDAO historiqueDAO = df.getHistoriqueDAO();
+
     document document = null;
     utilisateur utilisateur = null;
 
@@ -34,7 +37,7 @@ public class EditorRoom {
         try  {
             for(Session sess: sessionActives) {
                 if(connected){
-                    String bienvenu = "C:-" + utilisateur.getPseudo() + " vient de se connecter. Actuellement" + ( sessionActives.size() == 1? " une personne ": String.valueOf(sessionActives.size())+"personnes") + " dans le chat.";
+                    String bienvenu = "C:-" + utilisateur.getPseudo() + " vient de se connecter. Actuellement " + ( sessionActives.size() == 1? " une personne ": String.valueOf(sessionActives.size())+" personnes") + " dans le chat.";
                     if (session.isOpen()) sess.getBasicRemote().sendText(bienvenu);
                     ListSession.add(String.valueOf(session.getId()));
                 }else {
@@ -65,12 +68,16 @@ public class EditorRoom {
     }
     @OnMessage
     public void onMessage(String messageRecu, Session session){
+        HttpSession httpSession = (HttpSession) session.getUserProperties().get(HttpSession.class.getName());
+        document = (document) httpSession.getAttribute("document");
         if(messageRecu.contains("C:-")){
+            //Envoie un message pour le chat
             for(Session ses : sessionActives)
             {
                 if(ses != session) ses.getAsyncRemote().sendText(messageRecu);
             }
         }else if(messageRecu.contains("D:-")){
+            //Envoie un message pour la modification du document
             contenuDocument = messageRecu;
             document.setContenu(contenuDocument);
             document = documentDAO.modifier(document);
@@ -78,6 +85,16 @@ public class EditorRoom {
             {
                 if(ses != session) ses.getAsyncRemote().sendText(messageRecu);
             }
+        }else if (messageRecu.contains("H:-")) {
+
+           /* messageRecu = messageRecu.replaceAll("H:-", "");
+            System.out.println(messageRecu);
+            historique historique = historiqueDAO.getHistorique(messageRecu,utilisateur );
+            System.out.println(historique.getContenu_document());
+            // Envoie un message à tous les clients pour recharger la page
+            for (Session ses : sessionActives) {
+                if(ses != session) ses.getAsyncRemote().sendText("reload");
+            }*/
         }
     }
 

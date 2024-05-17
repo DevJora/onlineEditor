@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JoraOMVA
-  Date: 22/04/2024
-  Time: 19:01
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -13,18 +7,18 @@
     <title>Online Editor</title>
     <!--<link rel="stylesheet" href="assets/style.css" >-->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="./assets/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./assets/document.css">
+    <link rel="stylesheet" href="./assets/css/document.css">
     <!-- Latest compiled and minified JavaScript -->
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
 </head>
 <body onload="">
 <main>
-    <article >
+    <article class="d-flex justify-content-center" >
         <div class="editor" id="editor">
             <div class="outils">
                 <!--Liste des outils à utiliser-->
@@ -96,9 +90,15 @@
                 </button>
                 <!--save bloc-->
                 <button type="button" class="btn">
-                <span class="material-symbols-outlined">
+                <a href="ajouthistorique"><span class="material-symbols-outlined">
                     save
-                </span>
+                </span></a>
+                </button>
+                <!--to home-->
+                <button type="button" class="btn">
+                <a href="home"><span class="material-symbols-outlined">
+                    home
+                </span></a>
                 </button>
             </div>
             <div class="document" id="doc" >
@@ -111,9 +111,23 @@
 
             </div>-->
         </div>
+        <div class="historic m-2 w-25">
+            <div class="list-group">
+                <a class="list-group-item list-group-item-action active" aria-current="true">
+                    Historiques du document
+                </a>
+                <c:if test="${ historiques.size() <1}">
+                    <a href="" class="list-group-item list-group-item-action text-center">Pas de sauvegarde.</a>
+                </c:if>
+                <c:forEach var="historique" items="${historiques}">
+                    <p onclick="envoieHistorique(this)" id="${historique.date}" class="list-group-item list-group-item-action text-center pointer">sauvegarde du document le ${historique.date} par ${historique.utilisateur.pseudo}.</p>
+                </c:forEach>
+
+            </div>
+        </div>
     </article>
     <aside class="">
-        <div class="conv d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
+        <div class="conv d-flex flex-column flex-shrink-0 p-3 text-white bg-dark h-100">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
                 <span class="fs-4">Participants</span>
@@ -140,62 +154,15 @@
             </div>
         </div>
     </aside>
-    <!--    <div class="w-50 container" id="login">
-            <form class="container">
-                <h1 class="h3 mb-3 fw-normal">Connexion à l'espace utilisateur</h1>
-
-                <div class="form-floating">
-                    <input type="email" class="form-control" name="loginmail" placeholder="name@example.com">
-                    <label for="floatingInput">Adresse mail</label>
-                </div>
-                <div class="form-floating">
-                    <input type="password" class="form-control" name="loginpwd" placeholder="Password">
-                    <label for="floatingPassword">Mot de passe</label>
-                </div>
-
-                <button class="btn btn-primary w-100 py-2" type="submit">Connexion</button>
-                <button onclick="swtichToSignin()" class="btn btn-warning w-100 py-2">Nouveau compte</button>
-                <p class="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
-            </form>
-
-        </div>
-        <div class="w-50 container d-none" id="signin">
-            <form class="container">
-                <h1 class="h3 mb-3 fw-normal">Créer un compte</h1>
-                <div class="form-floating">
-                    <input type="email" class="form-control" id="nom" placeholder="">
-                    <label for="nom">Nom</label>
-                </div>
-                <div class="form-floating">
-                    <input type="email" class="form-control" id="prenom" placeholder="">
-                    <label for="prenom">Prénom</label>
-                </div>
-                <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Adresse mail</label>
-                </div>
-                <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Choisir un mot de passe</label>
-                </div>
-                <div class="form-floating">
-                    <input type="password" class="form-control" id="copyPass" placeholder="Password">
-                    <label for="floatingPassword">Confirmer le mot de passe</label>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <button class=" w-25 btn btn-primary w-100 py-2" type="submit">Inscription</button>
-                    <button onclick="swichToLogin()" class="w-25 btn btn-warning w-100 py-2">Déjà membre</button>
-                </div>
-                <p class="mt-5 mb-3 text-body-secondary">© 2017–2024</p>
-            </form>
-        </div>-->
 </main>
+
 
 <script src="./assets/model.js"></script>
 <script src="./assets/editor.js"></script>
 <script>
-
+    function envoieHistorique(e){
+        ws.send("H:-"+e.id);
+    }
 </script>
 </body>
 

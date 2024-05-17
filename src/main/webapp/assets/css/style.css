@@ -90,7 +90,7 @@ button {
 
 div {
     &#doc {
-        width: 640px;
+        width: 700px;
         min-height: 600px;
         padding: 50px 30px;
         background-color: white;
@@ -98,8 +98,9 @@ div {
     }
 
     &#chat {
-        height: 77vh;
+        min-height: 77vh;
     }
+
 
     &.content-chat {
         background-color: white;
@@ -133,7 +134,10 @@ button.delete-element{
     background-color: rgb(188, 90, 90);
     color: white;
     position: absolute;
-    left: 200px;
+    left: 5px;
 }
 
+.pointer {
+    cursor: pointer;
+}
 

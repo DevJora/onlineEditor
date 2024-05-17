@@ -27,20 +27,24 @@ public class AjoutCollabServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         user = (utilisateur) session.getAttribute("utilisateur");
-        documentCollab = documentDAO.getDocumentByCode(request.getParameter("code"));
-        if(collaborationDAO.ajouterCollaboration(documentCollab, user.getId())){
-            String urlServlet = request.getContextPath() + "/home";
-            // sendRedirect pour rediriger vers l'URL de l'edition
-            response.sendRedirect(urlServlet);
-        }else {
-            System.out.println("erreur de création du document.");
+
+        if(user!= null && (request.getParameter("code") != null)) {
+            documentCollab = documentDAO.getDocumentByCode(request.getParameter("code"));
+            if (documentCollab != null) {
+                if(collaborationDAO.ajouterCollaboration(documentCollab, user.getId())){
+                    String urlServlet = request.getContextPath() + "/home";
+                    // sendRedirect pour rediriger vers l'URL de l'edition
+                    response.sendRedirect(urlServlet);
+                }else {
+                    System.out.println("erreur de création du document.");
+                }
+            }
         }
     }
 }

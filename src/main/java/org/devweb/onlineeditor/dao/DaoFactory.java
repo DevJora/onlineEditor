@@ -40,4 +40,8 @@ public class DaoFactory {
     public DocumentDAO getDocumentDAO(){
         return  new DocumentDAO(this);
     }
+
+    public HistoriqueDAO getHistoriqueDAO() {
+        return new HistoriqueDAO(this);
+    }
 }

@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.devweb.onlineeditor.dao.DaoFactory;
 import org.devweb.onlineeditor.dao.DocumentDAO;
+import org.devweb.onlineeditor.dao.HistoriqueDAO;
 import org.devweb.onlineeditor.model.document;
 import org.devweb.onlineeditor.model.utilisateur;
 
@@ -22,6 +23,7 @@ import java.util.List;
 public class HomeServlet extends HttpServlet {
 
     private DocumentDAO documentDAO;
+    private HistoriqueDAO historiqueDAO;
     private utilisateur user;
 
     @Override

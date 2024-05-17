@@ -9,10 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 @WebServlet(name = "InscriptionServlet", value = "/inscription")
 public class InscriptionServlet extends HttpServlet {
@@ -37,11 +34,11 @@ public class InscriptionServlet extends HttpServlet {
 
         if (isSuccess) {
             // Redirection vers la page de connexion après l'inscription réussie
-            response.sendRedirect("index.jsp");
+            response.sendRedirect(request.getContextPath()+"/connexion");
         } else {
             // Gestion des erreurs d'inscription
 	    request.setAttribute("error", "L'e-mail fourni est déjà utilisé. Veuillez en choisir un autre.");          
-            response.sendRedirect("WEB-INF/inscription.jsp");
+            response.sendRedirect(request.getContextPath()+"/inscription");
         }
     }
 
