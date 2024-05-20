@@ -3,4 +3,6 @@ Editeur de texte en temps réel avec possibilité de modifier des documents en c
 ## Technos 
 - BACK Jakarta ee (JDBC, Java, Jstl, El, Websocket)
 - FRONT html css js (bootstrap)
+- Maven
+
 
